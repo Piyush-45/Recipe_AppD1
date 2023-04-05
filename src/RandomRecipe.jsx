@@ -25,7 +25,7 @@ const RandomRecipe = () => {
   };
 
   useEffect(() => {
-    // fetchRandomRecipe(Api);
+    fetchRandomRecipe(Api);
   }, []);
 
   return (
