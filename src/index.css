@@ -1,0 +1,510 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+/* ppppins */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*.
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+
+:root {
+  --font-family: 'EB Garamond', serif;
+  --primary-orange: #e35741;
+  --primary-heading: 'Dancing Script', cursive;
+}
+
+/* .home-link {
+  color: black;
+  text-decoration: none;
+} */
+
+.home-link:hover {
+  color: #e35741;
+}
+a {
+  text-decoration: none;
+}
+
+/*
+  3. Allow percentage-based heights in the application
+*/
+html,
+body {
+  height: 100%;
+  font-size: 62.5%;
+  font-family: var(--font-family);
+  /* background: #F5EDED; */
+  /* color: white; */
+}
+
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+
+}
+
+
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+  7. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/*
+  8. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+p {
+  display: inline-block;
+}
+li{
+  color: black;
+}
+a{
+  color: black;
+}
+/* !custom css */
+.app {
+  width: 80%;
+  margin: 3rem auto;
+  padding: 0.1rem
+}
+
+
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+nav img {
+  height: 5rem;
+  width: auto;
+
+}
+
+.nav__input {
+  display: flex;
+  gap: 2rem;
+}
+
+input[type=text] {
+  padding: 6px;
+  font-size: 1.5rem;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+input:focus {
+  outline: none;
+}
+
+.nav__input img {
+  height: 3rem;
+  background: var(--primary-orange);
+  border-radius: 50%;
+  padding: 0.5rem;
+  align-self: center;
+}
+
+.nav__input img:hover {
+  cursor: pointer;
+  /* background: black; */
+}
+
+
+
+.second_navbar__list {
+  font-size: 2rem;
+  text-decoration: none;
+  list-style-type: none;
+  margin-top: 4rem;
+  /* width: 50vw; */
+  display: flex;
+  gap: 4.5rem;
+  padding: 0;
+  /* background: red; */
+}
+
+.second_navbar__list li {
+  cursor: pointer;
+}
+
+.second_navbar__list li:hover {
+  color: #e35741;
+}
+
+
+/* ! HERO SWIPER  */
+.hero_swiper {
+  margin-top: 10rem;
+  /* height: 90rem; */
+  /* background: red; */
+
+
+}
+
+.main_dish {
+
+  font-size: 2rem;
+  color: #e35741;
+}
+
+.swiper_title {
+  color: black;
+  font-size: 2.1rem;
+}
+
+.swiper-slide-bottom {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.swiper-slide img {
+  width: 100%;
+  /* height: 70rem; */
+  object-fit: cover;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* ! POPULAR RECIPES  OR TRENDING*/
+h1 {
+  color: #e35741;
+  font-family: var(--primary-heading);
+  font-size: 4rem;
+  margin-bottom: 2.8rem;
+  margin-top: 5.5rem;
+  /* font-weight: ; */
+}
+
+.recipes_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 20px;
+  /* background: red; */
+  /* width: 100vw; */
+
+}
+
+.recipe_Card {
+  display: flex;
+  flex-direction: column;
+  /* background: red; */
+}
+
+.recipe_card__bottom {
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-top: 0.1px solid lightgray;
+  /* width: 98%; */
+}
+
+.main_image {
+  object-fit: cover;
+  border-radius: 0.5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+.time_required {
+  font-size: 1.5rem;
+  color: gray;
+}
+
+.recipe_card__title {
+  font-size: 2rem;
+  font-family: var(--font-family);
+  color: black;
+  margin-top: 0.8rem;
+}
+
+.likepara {
+  height: 5rem;
+  /* width: 100%; */
+  cursor: pointer;
+  /* background: yellow; */
+}
+.like{
+  height: 100%;
+  width: 3rem;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  outline: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+}
+
+.dropbtn:hover {
+  color: var(--primary-orange);
+}
+
+
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  background-color: white;
+  /* color: var(--primary-orange); */
+  /* padding: 12px 16px; */
+  font-size: 16px;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  /* add overflow property */
+  height: 0;
+  /* set initial height to 0 */
+  z-index: 9999;
+}
+
+.dropdown-content.show {
+  height: 20rem;
+  /* height: fit-content; */
+}
+
+.dropdown-content a {
+  color: gray;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease-in-out;
+}
+
+.dropdown-content a:hover {
+  background-color: #f2f2f2;
+  color: black;
+}
+.p{
+  display: flex;
+  align-items: center;
+}
+
+/* ! RECIPE PAGE */
+
+.recipe-detailPage {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem auto;
+  height: 100%;
+  width: 80%;
+  gap: 2rem;
+  align-items: center;
+  border: 2px solid #e35741;
+  padding: 1rem;
+
+}
+
+.recipe-detailPage img {
+  height: 50vh;
+  width: 50rem;
+  object-fit: cover;
+}
+
+.recipe-detailPage h2 {
+  font-size: 4rem;
+}
+
+.recipeDetail-summary, .recipe-instructions {
+  font-size: 1.9rem;
+  color: #595959;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.summary-heading {
+  color: white;
+  background-color: #e35741;
+  font-size: 1.5rem;
+  padding: 0.8rem 1.3rem;
+  width: fit-content;
+  font-weight: 400;
+  font-family: 'Mova';
+}
+.li{
+  font-size: 2rem;
+  color: #595959;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+
+/* !login */
+
+.login-page-container {
+
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50rem;
+  gap: 1rem;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form-control {
+  /* display: block; */
+  width: 100%;
+  padding: 0.8rem 1rem;
+  /* font-size: 1.2rem; */
+  /* line-height: 1.5; */
+  color: #495057;
+  background-color: #f5f5f5;
+  background-clip: padding-box;
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.form-control:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #e35741;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  background-color: #d23e26;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn-primary {
+  background-color: #e35741;
+}
+
+.btn-primary:hover {
+  background-color: #d23e26;
+}
+
+
+/* ! ACCOUNT */
+.account{
+  margin: 10rem auto;
+  
+}
+
+.delete-icon{
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  /* background: rebeccapurple; */
+}
+.card_footer{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  /* padding-inline: 0.5rem; */
+
+}
+.card_footer h3{
+font-size: 2rem; 
+font-weight: normal;
+
+}
+
+
+
+
