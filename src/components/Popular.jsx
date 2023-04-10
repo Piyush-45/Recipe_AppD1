@@ -9,26 +9,33 @@ import SimilarRecipes from "./SimilarRecipes";
 const Popular = () => {
   const key1 = `62bd0b953b6c4a50a3fff4e27084d94c`;
   const key2 = ` 7d8e3d34745c4731b1da758cdad1b008`;
-  const APi = `https://api.spoonacular.com/recipes/complexSearch?apiKey=817073eab2c64effbdbffe3f78543ae2&number=20&cuisine=Irish`;
+  const APi = `https://api.spoonacular.com/recipes/complexSearch?apiKey=817073eab2c64effbdbffe3f78543ae2&number=10&cuisine=Irish`;
 
   const [popularRecipes, setPopularRecipes] = useState([]);
+  const [nextPage, setNextPage] = useState(2);
 
   const fetchPopularRecipe = async (url) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
       setPopularRecipes(data.results);
-      //   setImageData(data.recipes.image);
-      //   console.log(data)
     } catch (err) {
       console.log(err);
     }
   };
 
+  const fetchMoreData = async () => {
+    const moreRecipes = await fetch(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=817073eab2c64effbdbffe3f78543ae2&number=10&cuisine=Italian&page=${nextPage}`
+    );
+    const data = await moreRecipes.json()
+    setPopularRecipes((prevRecipes)=> [...prevRecipes, ...data.results])
+    setNextPage(nextPage+1)
+  };
+
   useEffect(() => {
     fetchPopularRecipe(APi);
   }, []);
-
 
   return (
     <>
@@ -42,7 +49,7 @@ const Popular = () => {
                 <RecipeCard id={id} title={title} image={image} />
               </Link>
               <RecipeCardBottom
-                similarRecipes={<SimilarRecipes id={id}/>}
+                similarRecipes={<SimilarRecipes id={id} />}
                 id={id}
                 title={title}
                 image={image}
@@ -51,8 +58,31 @@ const Popular = () => {
           );
         })}
       </div>
+
+      {popularRecipes !==null && popularRecipes.length >=10 &&(
+        <div className="load-more">
+          <button onClick={fetchMoreData}> Load More</button>
+        </div>
+      )}
     </>
   );
 };
 
 export default Popular;
+
+
+
+
+
+// ! working of function more recipes
+// ?This is a code snippet that defines an asynchronous function called fetchMoreData.
+
+// ?This function sends a request to the Spoonacular API to retrieve more Italian recipes, using the fetch function. The await keyword is used to wait for the response to be received before continuing with the function's execution.
+
+// ?Once the response is received, it is parsed as JSON using the json method, and the resulting data is stored in the data variable.
+
+// ?Then, the setPopularRecipes function is called with a callback that takes the previous state of popularRecipes and appends the new data from data.results using the spread operator .... This updates the state of the component that called this function with the new list of recipes.
+
+//? Finally, the setNextPage function is called to update the state of the nextPage variable by incrementing it by 1. This is used to retrieve the next page of results when the function is called again.
+
+// ?Overall, this code is used to load more Italian recipes from the Spoonacular API as the user scrolls through a list of recipes, allowing them to see more content without having to load a new page.

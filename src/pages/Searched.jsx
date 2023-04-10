@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const Searched = () => {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const { search } = useParams();
+  
   const API_KEY = "7d8e3d34745c4731b1da758cdad1b008";
 
   const fetchResult = async () => {

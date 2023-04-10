@@ -4,9 +4,10 @@ import RecipeCard, { RecipeCardBottom } from "../components/RecipeCard";
 import { Link } from "react-router-dom";
 
 const Thai = () => {
-  const API = `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&number=20&cusine=Thai`;
+  const API = `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&number=11&cusine=Thai`;
 
   const [ThaiRecipes, setThaiRecipes] = useState([]);
+  const [nextPage, setNextPage] = useState(2);
 
   const fetchThaiRecipe = async (url) => {
     try {
@@ -18,6 +19,15 @@ const Thai = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const fetchMoreData = async () => {
+    const moreRecipes = await fetch(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&number=10&cusine=Thai&page=${nextPage}`
+    );
+    const data = await moreRecipes.json()
+    setThaiRecipes((prevRecipes)=> [...prevRecipes, ...data.results])
+    setNextPage(nextPage+1)
   };
 
   useEffect(() => {
@@ -49,6 +59,12 @@ const Thai = () => {
           );
         })}
       </div>
+
+      {ThaiRecipes!==null && ThaiRecipes.length >10 &&(
+        <div className="load-more">
+          <button onClick={fetchMoreData}> Load More</button>
+        </div>
+      )}
     </>
   );
 };

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const RandomRecipe = () => {
   const key = "2af405af41b84ff6a4b8f0cea79b1c5a"; // tyagiharsh
   const key2 = " 7d8e3d34745c4731b1da758cdad1b008";
-  const Api = `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&cuisine=American,Spanish,Indian&number=12`;
+  const Api = `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&cuisine=American&number=12`;
 
   const [randomRecipe, setRandomRecipe] = useState([]);
 

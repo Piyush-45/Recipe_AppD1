@@ -6,7 +6,7 @@ import Vegetarian from '../components/Vegetarian'
 const Home = () => {
   return (
     <>
-    <RandomRecipe/>
+    {/* <RandomRecipe/> */}
     <Popular/>
     <Vegetarian/>
     </>

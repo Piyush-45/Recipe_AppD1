@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TasteWidget = () => {
+const NutritionLable = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const TasteWidget = () => {
   )
 }
 
-export default TasteWidget
+export default NutritionLable

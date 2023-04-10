@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import RecipeCard, { RecipeCardBottom } from "../components/RecipeCard";
 import { Link } from "react-router-dom";
 const Italian = () => {
-  const API = `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&number=20&cusine=Italian`;
+  const API = `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&number=11&cusine=Italian`;
 
   const [italianRecipes, setItalianRecipes] = useState([]);
+  const[nextPage, setNextPage] = useState(2)
 
   const fetchAmericanRecipe = async (url) => {
     try {
@@ -19,12 +20,22 @@ const Italian = () => {
     }
   };
 
+  const fetchMoreData = async () => {
+    const moreRecipes = await fetch(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&number=10&cusine=Italian&page=${nextPage}`
+    );
+    const data = await moreRecipes.json()
+    setItalianRecipes((prevRecipes)=> [...prevRecipes, ...data.results])
+    setNextPage(nextPage+1)
+  };
+ 
+
   useEffect(() => {
     fetchAmericanRecipe(API);
   }, []);
   return (
     <>
-      <h1 id="popular">American Cuisines</h1>
+      <h1 id="popular">Italian Cuisines</h1>
       <div className="recipes_container">
         {italianRecipes.map((recipe) => {
           const { id, title, image, readyInMinutes } = recipe;
@@ -49,6 +60,12 @@ const Italian = () => {
           );
         })}
       </div>
+
+      {italianRecipes !==null && italianRecipes.length >10 &&(
+        <div className="load-more">
+          <button onClick={fetchMoreData}> Load More</button>
+        </div>
+      )}
     </>
   );
 };

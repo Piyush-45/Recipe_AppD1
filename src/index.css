@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 /* ppppins */
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
+
 *,
 *::before,
 *::after {
@@ -29,6 +30,7 @@
 .home-link:hover {
   color: #e35741;
 }
+
 a {
   text-decoration: none;
 }
@@ -103,12 +105,15 @@ h6 {
 p {
   display: inline-block;
 }
-li{
+
+li {
   color: black;
 }
-a{
+
+a {
   color: black;
 }
+
 /* !custom css */
 .app {
   width: 80%;
@@ -123,6 +128,28 @@ nav {
   align-items: center;
   justify-content: space-between;
 
+}
+
+.logo-container {
+  /* background: yellow; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+
+
+}
+
+.logo-h1 {
+  color: black;
+  font-family: 'Mova';
+  font-size: 3rem;
+}
+
+.logo-p {
+  color: var(--primary-orange);
+  font-size: 2rem;
+  font-weight: 300;
 }
 
 nav img {
@@ -279,7 +306,8 @@ h1 {
   cursor: pointer;
   /* background: yellow; */
 }
-.like{
+
+.like {
   height: 100%;
   width: 3rem;
 }
@@ -288,6 +316,8 @@ h1 {
 .dropdown {
   position: relative;
   display: inline-block;
+  /* overflow-y: scroll; */
+  /* height: fit-content; */
 }
 
 .dropbtn {
@@ -332,8 +362,8 @@ h1 {
 }
 
 .dropdown-content.show {
-  height: 20rem;
-  /* height: fit-content; */
+  /* height: 25rem; */
+  height: fit-content;
 }
 
 .dropdown-content a {
@@ -342,15 +372,47 @@ h1 {
   text-decoration: none;
   display: block;
   transition: all 0.3s ease-in-out;
+  padding-bottom: 0.5rem;
 }
 
 .dropdown-content a:hover {
   background-color: #f2f2f2;
   color: black;
 }
-.p{
+
+.p {
   display: flex;
   align-items: center;
+}
+
+.load-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.load-more button {
+  width: fit-content;
+  padding: 1rem;
+  /* height: 3rem; */
+  border: none;
+  text-align: center;
+  font-size: 2rem;
+  outline: none;
+  color: #e35741;
+  background: transparent;
+  cursor: pointer;
+  border: 1.2px solid gray;
+  margin-bottom: 1rem;
+  transition-duration: 0.5s;
+
+}
+
+.load-more button:hover {
+  color: white;
+  background: var(--primary-orange);
+
 }
 
 /* ! RECIPE PAGE */
@@ -369,8 +431,8 @@ h1 {
 }
 
 .recipe-detailPage img {
-  height: 50vh;
-  width: 50rem;
+  max-width: 100%;
+  height: auto;
   object-fit: cover;
 }
 
@@ -378,7 +440,8 @@ h1 {
   font-size: 4rem;
 }
 
-.recipeDetail-summary, .recipe-instructions {
+.recipeDetail-summary,
+.recipe-instructions {
   font-size: 1.9rem;
   color: #595959;
   font-family: 'Poppins', sans-serif;
@@ -394,7 +457,8 @@ h1 {
   font-weight: 400;
   font-family: 'Mova';
 }
-.li{
+
+.li {
   font-size: 2rem;
   color: #595959;
   font-family: 'Poppins', sans-serif;
@@ -414,11 +478,13 @@ h1 {
   height: 50rem;
   gap: 1rem;
 }
-form{
+
+form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
+
 .form-control {
   /* display: block; */
   width: 100%;
@@ -433,6 +499,7 @@ form{
   transition: all 0.2s ease-in-out;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
 .form-control:focus {
   outline: none;
   border: none;
@@ -479,18 +546,19 @@ form{
 
 
 /* ! ACCOUNT */
-.account{
+.account {
   margin: 10rem auto;
-  
+
 }
 
-.delete-icon{
+.delete-icon {
   width: 2rem;
   height: 2rem;
   cursor: pointer;
   /* background: rebeccapurple; */
 }
-.card_footer{
+
+.card_footer {
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -499,10 +567,123 @@ form{
   /* padding-inline: 0.5rem; */
 
 }
-.card_footer h3{
-font-size: 2rem; 
-font-weight: normal;
 
+.card_footer h3 {
+  font-size: 2rem;
+  font-weight: normal;
+
+}
+
+.navbars_container {
+  position: relative;
+}
+
+.hamburger {
+  
+  /* // removes default border on button element */
+  border: 0;
+  height: 40px;
+  width: 40px;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--primary-orange);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  /* // positions the icon to the right and center aligns it vertically */
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  display: none;
+}
+
+.hamburger:hover {
+  background-color: #2642af;
+}
+
+
+
+/* !MEDIA QUERIES */
+
+@media screen and (max-width: 1280px) {
+  .app {
+    width: 88%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app {
+    width: 95%;
+  }
+
+  .logo-h1 {
+    font-size: 2rem;
+  }
+
+  .logo-p {
+    font-size: 1.2rem;
+  }
+
+  input[type=text] {
+    font-size: 1rem;
+    padding: 2px;
+
+
+  }
+
+  .nav__input img {
+    height: 2.5rem;
+  }
+
+  .second_navbar__list {
+    font-size: 1.6rem;
+  }
+
+  .dropbtn {
+    font-size: 1.6rem;
+  }
+
+
+  /* ? recipe details page */
+  h2 {
+    font-size: 2.5rem !important;
+  }
+
+  .recipe-detailPage {
+    margin-top: 2rem;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .recipeDetail-summary,
+  .li {
+    font-size: 1.5rem;
+  }
+
+
+
+}
+
+
+@media screen and (max-width: 480px) {
+.recipe_card__title{
+  font-size: 1.8rem;
+}
+.like{
+  width: 2rem;
+}
+/*   
+form{
+  display: none;
+} */
+  /* .second_navbar__list {
+    display: none;
+    
+  }
+
+  .hamburger {
+    display: block;
+  } */
 }
 
 

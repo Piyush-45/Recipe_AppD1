@@ -15,6 +15,7 @@ import { AuthContextProvider } from "../context/AuthContext";
 import Account from "./pages/Account";
 import Searched from "./pages/Searched";
 import SimilarRecipes from "./components/SimilarRecipes";
+import VoiceCheck from "./pages/VoiceCheck";
 const App = () => {
   return (
 
@@ -34,6 +35,8 @@ const App = () => {
         <Route path="/account" element={<Account/>}/>
         <Route path="/similarrecipe/:id" element={<SimilarRecipes/>}/>
         <Route path="/searched/:search" element={<Searched/>}/>
+<Route path="/voice" element={<VoiceCheck/>}/>
+        <Route path="/searched/" element={<Searched />} />
        </Routes>
 
       </AuthContextProvider>
