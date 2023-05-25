@@ -1,84 +1,265 @@
-import React from "react";
-import { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
+// import { useParams } from "react-router-dom";
+// import RecipeCard from "../components/RecipeCard";
+// import AnalyzedInstructions from "../components/AnalyzedInstructions/AnalyzedInstructions";
+// import Ingredients from "../components/Ingredients/Ingredients";
+// import SimilarRecipes from "../components/SimilarRecipes";
+// import NutritionWidget from "../components/NutritionWidgets/NutritionWidgets";
+// import { UserAuth } from "../../context/AuthContext";
+// import RecipeDetail from "../pages/pagesStyles/RecipeDetail.css";
+// import { RecipeCardBottom } from "../components/RecipeCard";
+
+// // import {}
+
+// const RecipeDetails = () => {
+// //   const {
+// //     steps,
+// //     ingredients,
+// //     recipeDetail,
+// //     setRecipeDetails,
+// //     readyInMinutes,
+// //     glutenFree,
+// //     vegan,
+// //     vegetarian,
+// //     dairyFree,
+// //     fetchRecipeDetails
+// //   } = UseRecipeDetailsContext();
+//   const { API_KEY2 } = UserAuth();
+//   const { id } = useParams();
+//   const [recipeDetail, setRecipeDetails] = useState({});
+//   const [ingredients, setIngredients] = useState([]);
+//   const [steps, setSteps] = useState([]);
+//   const [readyInMinutes, setReadyInMinutes] = useState("");
+//   const [glutenFree, setGlutenFree] = useState(false);
+//   const [vegan, setVegan] = useState(false);
+//   const [vegetarian, setVegetarian] = useState(false);
+//   const [dairyFree, setDairyFree] = useState(false);
+
+//   const API = `https://api.spoonacular.com/recipes/${id}/information?apiKey=62bd0b953b6c4a50a3fff4e27084d94c`;
+
+//   const fetchRecipeDetails = async (url) => {
+//     try {
+//       const response = await fetch(url);
+//       const data = await response.json();
+//       console.log(data);
+//       setRecipeDetails(data);
+//       setSteps(data.analyzedInstructions[0]?.steps || []);
+//       setIngredients(data.extendedIngredients || []);
+//       setReadyInMinutes(data.readyInMinutes || "");
+//       setGlutenFree(data.glutenFree || false);
+//       setVegetarian(data.vegetarian || false);
+//       setVegan(data.vegan || false);
+//       setDairyFree(data.dairyFree || false);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchRecipeDetails(API);
+
+
+
+//   }, [id]);
+  
+
+//   const removeHTMLTags = (str) => {
+//     return str ? str.replace(/(<([^>]+)>)/gi, "").trim() : "";
+//   };
+
+//   const summary = removeHTMLTags(recipeDetail.summary)?.replace(/<br>/g, " ");
+//   const instructions = recipeDetail.instructions
+//     ?.split("<li>")
+//     .map((instruction) => {
+//       let modifiedInstruction = instruction.replace(/<li>/g, "");
+//       modifiedInstruction = modifiedInstruction.replace(/<\/li>/g, "");
+//       modifiedInstruction = removeHTMLTags(modifiedInstruction);
+//       return modifiedInstruction;
+//     });
+
+//   return (
+//     <div className="recipe-detailPage">
+//      <div className="title-add_To_fvrt-container">
+//      {recipeDetail.title && (
+//         <p className="recipeDetailHeading">{recipeDetail.title}</p>
+//       )}
+//       {
+//         <RecipeCardBottom/>
+//       }
+//      </div>
+//       <div className="image_basicInfo_Container">
+//         {recipeDetail.image && <img src={recipeDetail.image} alt="" />}
+//         <div className="recipe-basicInfo-box">
+//           <p>{readyInMinutes} Minutes</p>
+//           <p>{vegetarian ? "Vegetarian" : "Non-veg"}</p>
+//           <p>{vegan ? "Vegan" : "Non-Vegan"}</p>
+//           <p>{dairyFree ? "Lactose-free" : "Contains dairy"}</p>
+//           <p>{glutenFree ? "Gluten free" : "Contains gluten"}</p>
+//         </div>
+//       </div>
+
+//       {summary && (
+//         <div>
+//           <div className="directions_container-heading">
+//             <p className="summary-heading">Recipe Summary</p>
+//             <p className="horizontal-line"></p>
+//           </div>
+//           <p className="recipeDetail-summary">{summary}</p>
+//         </div>
+//       )}
+//       {ingredients && (
+//         <div>
+//           <div className="directions_container-heading">
+//             <p className="summary-heading">Ingredients</p>
+//             <p className="horizontal-line"></p>
+//           </div>
+//           <div className="ingredients_container">
+//             <Ingredients ingredientsData={ingredients} />
+//           </div>
+//         </div>
+//       )}
+//       {instructions && (
+//         <div className="directions_container">
+//           <div className="directions_container-heading">
+//             <p className="summary-heading">Directions</p>
+//             <p className="horizontal-line"></p>
+//           </div>
+//           <div className="directions">
+//             <AnalyzedInstructions id={id} steps={steps} />
+//           </div>
+//         </div>
+//       )}
+
+//       {/* <SimilarRecipes /> */}
+//     </div>
+//   );
+// };
+
+// export default RecipeDetails;
+
+
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RecipeCard from "../components/RecipeCard";
+import AnalyzedInstructions from "../components/AnalyzedInstructions/AnalyzedInstructions";
+import Ingredients from "../components/Ingredients/Ingredients";
+import SimilarRecipes from "../components/SimilarRecipes";
+import NutritionWidget from "../components/NutritionWidgets/NutritionWidgets";
+import { UserAuth } from "../../context/AuthContext";
+import RecipeDetail from "../pages/pagesStyles/RecipeDetail.css";
+import { RecipeCardBottom } from "../components/RecipeCard";
 
 const RecipeDetails = () => {
   const { id } = useParams();
+  const { API_KEY2 } = UserAuth();
   const [recipeDetail, setRecipeDetails] = useState({});
-  const apiKey = "7d8e3d34745c4731b1da758cdad1b008";
-  const API = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`;
+  const [ingredients, setIngredients] = useState([]);
+  const [steps, setSteps] = useState([]);
+  const [readyInMinutes, setReadyInMinutes] = useState("");
+  const [glutenFree, setGlutenFree] = useState(false);
+  const [vegan, setVegan] = useState(false);
+  const [vegetarian, setVegetarian] = useState(false);
+  const [dairyFree, setDairyFree] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const API = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY2}`;
 
   const fetchRecipeDetails = async (url) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data);
       setRecipeDetails(data);
-      // console.log(data.instructions);
+      setSteps(data.analyzedInstructions[0]?.steps || []);
+      setIngredients(data.extendedIngredients || []);
+      setReadyInMinutes(data.readyInMinutes || "");
+      setGlutenFree(data.glutenFree || false);
+      setVegetarian(data.vegetarian || false);
+      setVegan(data.vegan || false);
+      setDairyFree(data.dairyFree || false);
+      setLoading(false);
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchRecipeDetails(API);
-  }, []);
+  }, [id]);
 
-  // Remove the br tags from the summary string
-  const summary = recipeDetail.summary?.replace(/<br>/g, " ");
+  const removeHTMLTags = (str) => {
+    return str ? str.replace(/(<([^>]+)>)/gi, "").trim() : "";
+  };
 
-  // Split the instructions string by the <li> tag to create an array of instructions
-  const instructions = recipeDetail.instructions?.split("<li>").map((instruction) => {
-    // Remove the opening <li> tag
-    let modifiedInstruction = instruction.replace(/<li>/g, "");
+  const summary = removeHTMLTags(recipeDetail.summary)?.replace(/<br>/g, " ");
+  const instructions = recipeDetail.instructions
+    ?.split("<li>")
+    .map((instruction) => {
+      let modifiedInstruction = instruction.replace(/<li>/g, "");
+      modifiedInstruction = modifiedInstruction.replace(/<\/li>/g, "");
+      modifiedInstruction = removeHTMLTags(modifiedInstruction);
+      return modifiedInstruction;
+    });
 
-    // Remove the closing </li> tag
-    modifiedInstruction = modifiedInstruction.replace(/<\/li>/g, "");
-
-    // Remove any other HTML tags and trim the result
-    modifiedInstruction = modifiedInstruction.replace(/(<([^>]+)>)/gi, "").trim();
-
-    return modifiedInstruction;
-  });
+  if (loading) {
+    return <h1>Loading...</h1>; // Replace with your loading indicator component
+  }
 
   return (
     <div className="recipe-detailPage">
-      {recipeDetail.image && <img src={recipeDetail.image} alt="" />}
-      {recipeDetail.title && <h2>{recipeDetail.title}</h2>}
-      {/* {recipeDetail.readyInMinutes && (
-        <p className="recipeDetail-time">
-          Ready In Minutes: {recipeDetail.readyInMinutes}
-        </p>
-      )} */}
+      <div className="title-add_To_fvrt-container">
+        {recipeDetail.title && (
+          <p className="recipeDetailHeading">{recipeDetail.title}</p>
+        )}
+        <RecipeCardBottom />
+      </div>
+      <div className="image_basicInfo_Container">
+        {recipeDetail.image && <img src={recipeDetail.image} alt="" />}
+        <div className="recipe-basicInfo-box">
+          <p>{readyInMinutes} Minutes</p>
+          <p>{vegetarian ? "Vegetarian" : "Non-veg"}</p>
+          <p>{vegan ? "Vegan" : "Non-Vegan"}</p>
+          <p>{dairyFree ? "Lactose-free" : "Contains dairy"}</p>
+          <p>{glutenFree ? "Gluten free" : "Contains gluten"}</p>
+        </div>
+      </div>
+
       {summary && (
         <div>
-          <p className="summary-heading">Recipe Summary</p>
-          <p
-            className="recipeDetail-summary"
-            dangerouslySetInnerHTML={{ __html: summary }}
-          ></p>
+          <div className="directions_container-heading">
+            <p className="summary-heading">Recipe Summary</p>
+            <p className="horizontal-line"></p>
+          </div>
+          <p className="recipeDetail-summary">{summary}</p>
+        </div>
+      )}
+      {ingredients && (
+        <div>
+          <div className="directions_container-heading">
+            <p className="summary-heading">Ingredients</p>
+            <p className="horizontal-line"></p>
+          </div>
+          <div className="ingredients_container">
+            <Ingredients ingredientsData={ingredients} />
+          </div>
         </div>
       )}
       {instructions && (
-        <div>
-          <p className="summary-heading">Instructions for Making </p>
-          <ol>
-            {instructions.map((instruction, index) => (
-              <li key={index} className="li">
-                {instruction}
-              </li>
-            ))}
-          </ol>
+        <div className="directions_container">
+          <div className="directions_container-heading">
+            <p className="summary-heading">Directions</p>
+            <p className="horizontal-line"></p>
+          </div>
+          <div className="directions">
+            <AnalyzedInstructions id={id} steps={steps} />
+          </div>
         </div>
       )}
+
+      {/* <SimilarRecipes /> */}
     </div>
   );
 };
 
 export default RecipeDetails;
-
-
-
-
-
-// In this updated code, I added a step to remove any other HTML tags from the instructions by using a regular expression to match and remove anything between < and >. This ensures that only the text content of each instruction is displayed in the <li> tags, and the <ol> tags should not be visible on the page.

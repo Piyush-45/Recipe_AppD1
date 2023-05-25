@@ -36,7 +36,7 @@ const Thai = () => {
   return (
     <>
       <h1 id="popular">Thai Cuisines</h1>
-      <div className="recipes_container">
+      <div className="recipes_container dropdwon-recipes">
         {ThaiRecipes.map((recipe) => {
           const { id, title, image, readyInMinutes } = recipe;
           return (
@@ -49,12 +49,12 @@ const Thai = () => {
                   image={image}
                 />
               </Link>
-              <RecipeCardBottom
+              {/* <RecipeCardBottom
                 readyInMinutes={readyInMinutes}
                 id={id}
                 title={title}
                 image={image}
-              />
+              /> */}
             </div>
           );
         })}

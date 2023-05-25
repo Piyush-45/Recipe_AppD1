@@ -8,7 +8,7 @@ const Searched = () => {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const { search } = useParams();
   
-  const API_KEY = "7d8e3d34745c4731b1da758cdad1b008";
+  const API_KEY = "2af405af41b84ff6a4b8f0cea79b1c5a";
 
   const fetchResult = async () => {
     try {
@@ -30,25 +30,28 @@ const Searched = () => {
   return (
     <>
       <h1>Showing result for {search} </h1>
-      <div className="recipes_container">
-        {searchedRecipes.map((item) => {
-          const { id, title, image } = item;
-          return (
-            <>
-              <div className="recipe_Card">
-                <Link to={`/recipe/${id}`}>
-                  <RecipeCard key={id} title={title} image={image} />
-                </Link>
-                <RecipeCardBottom
-                  // readyInMinutes={readyInMinutes}
-                  id={id}
-                  title={title}
-                  image={image}
-                />
-              </div>
-            </>
-          );
-        })}
+      <div className="recipes_container searched-container" >
+        {searchedRecipes.length > 0 ? (
+          searchedRecipes.map((item) => {
+            const { id, title, image } = item;
+            return (
+              <>
+                <div className="recipe_Card" key={id
+                }>
+                  <Link to={`/recipe/${id}`}>
+                    <RecipeCard key={id} title={title} image={image} />
+                  </Link>
+                  <RecipeCardBottom
+                    // readyInMinutes={readyInMinutes}
+                    id={id}
+                    title={title}
+                    image={image}
+                  />
+                </div>
+              </>
+            );
+          })
+        ):(<h3>No Recipes Found</h3> )}
       </div>
     </>
   );

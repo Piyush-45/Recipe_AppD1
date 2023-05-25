@@ -5,12 +5,15 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Link } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
 
 const RandomRecipe = () => {
   const key = "2af405af41b84ff6a4b8f0cea79b1c5a"; // tyagiharsh
   const key2 = " 7d8e3d34745c4731b1da758cdad1b008";
-  const Api = `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&cuisine=American&number=12`;
+  const{API_KEY1} = UserAuth()
+  // const Api = `https://api.spoonacular.com/recipes/complexSearch?apiKey=2af405af41b84ff6a4b8f0cea79b1c5a&cuisine=American&number=12`;
 
+  const Api = `https://api.spoonacular.com/recipes/complexSearch?sort=popularity&apiKey=${API_KEY1}`
   const [randomRecipe, setRandomRecipe] = useState([]);
 
   const fetchRandomRecipe = async (url) => {
@@ -24,9 +27,9 @@ const RandomRecipe = () => {
     }
   };
 
-  useEffect(() => {
-    fetchRandomRecipe(Api);
-  }, []);
+  // useEffect(() => {
+  //   fetchRandomRecipe(Api);
+  // }, []);
 
   return (
     <div className="hero_swiper" id="all_recipes">

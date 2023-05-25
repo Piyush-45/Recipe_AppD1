@@ -3,27 +3,29 @@ import React, { useState } from "react";
 import { Link as Links } from "react-scroll";
 import { Link } from "react-router-dom";
 function RecipesDropdown() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  
+  const handleMenuItemClick = () => {
+    setOpen(false);
   };
 
   return (
     <div className="dropdown">
-      <button className="dropbtn" onClick={toggleMenu}>
+      <button className="dropbtn" onClick={()=>{setOpen(!open)}}>
         Recipes
       </button>
-      <div className={`dropdown-content ${isOpen ? "show" : ""}`}>
-        <Links to="popular" smooth={true} duration={500}>
+      <div className={`dropdown-content ${open ? "show" : "inactive"}`}>
+        {/* <Links to="popular" smooth={true} duration={500}   onClick={handleMenuItemClick}>
           Popular
         </Links>
-        <Links to="vegetarian" smooth={true} duration={500}>
+        <Links to="vegetarian" smooth={true} duration={500}  onClick={handleMenuItemClick}>
           Vegetarian
-        </Links>
-        <Link to="/american">American</Link>
-        <Link to="/thai">Thai </Link>
-        <Link to="/italian">Italian</Link>
+        </Links> */}
+        <Link to="/american"  onClick={handleMenuItemClick}>American</Link>
+        <Link to="/italian"  onClick={handleMenuItemClick}>Italian</Link>
+        <Link to="/thai"  onClick={handleMenuItemClick}>Thai </Link>
+        <Link to="/vegan"  onClick={handleMenuItemClick}>Vegan </Link>
       </div>
     </div>
   );

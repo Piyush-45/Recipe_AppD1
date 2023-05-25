@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import RecipeCard, { RecipeCardBottom } from "./RecipeCard";
 import { Link } from "react-router-dom";
 import SimilarRecipes from "./SimilarRecipes";
+import { UserAuth } from "../../context/AuthContext";
 
 const Vegetarian = () => {
-  const key1 = `62bd0b953b6c4a50a3fff4e27084d94c`;
-  const key2 = " 7d8e3d34745c4731b1da758cdad1b008";
-  const APi = `https://api.spoonacular.com/recipes/complexSearch?apiKey=817073eab2c64effbdbffe3f78543ae2&query=vegetarian&number=10`;
+
+const{API_KEY1, API_KEY2,API_KEY3} = UserAuth() 
+  const APi = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY2}&query=vegetarian&number=10`;
 
   const [vegetarian, setVegetarian] = useState(null);
   const [nextPage, setNextPage] = useState(2); // set default page to 2
@@ -24,16 +25,16 @@ const Vegetarian = () => {
 
   const fetchMoreData = async () => {
     const moreRecipes = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=817073eab2c64effbdbffe3f78543ae2&query=vegetarian&number=10&page=${nextPage}`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY2}&query=vegetarian&number=10&page=${nextPage}`
     );
     const data = await moreRecipes.json();
     setVegetarian((prevRecipes) => [...prevRecipes, ...data.results]);
     setNextPage(nextPage + 1);
   };
 
-  useEffect(() => {
-    fetchVegetarian(APi);
-  }, []);
+  // useEffect(() => {
+  //   fetchVegetarian(APi);
+  // }, []);
 
   return (
     <>
@@ -44,15 +45,15 @@ const Vegetarian = () => {
             const { id, title, image, readyInMinutes } = item;
             return (
               <div className="recipe_Card" key={id}>
-                <Link key={id} to={`/recipe/${id}`} className="home-link">
-                  <RecipeCard key={id} title={title} image={image} />
+                <Link key={id} to={`/recipe/${id}`} >
+                  <RecipeCard key={id} title={title} image={image} className="recipe-img"/>
                 </Link>
-                <RecipeCardBottom
-                  similarRecipes={<SimilarRecipes id={id} />}
+                {/* <RecipeCardBottom
+                  // similarRecipes=
                   id={id}
                   title={title}
                   image={image}
-                />
+                /> */}
               </div>
             );
           })}

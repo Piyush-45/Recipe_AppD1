@@ -4,52 +4,66 @@ import { app } from "../../context/Firebase";
 import { getAuth } from "firebase/auth";
 import { UserAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { db } from "../../context/Firebase";
 const Register = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const{user, signUp} = UserAuth()
-    let navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { user, signUp } = UserAuth();
+  let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await signUp(email, password);
-      navigate("/");
+      if (email === "" || password === "") {
+        toast.warn("Email or Password cannot be empty");
+      } else {
+        await signUp(email, password);
+        navigate("/");
+        toast.success("Account created successfully");
+      }
     } catch (err) {
-      alert(err);
+      toast.warn(err)
     }
     //   console.log(email)
   };
 
   return (
     <div className="login-page-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Rgister to Recipe App</h2>
-        <div className="form-group">
-          <label htmlFor="username">E-mail</label>
-          <input
-            type="email"
-            className="form-control"
-            id="username"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+    <div className="flex-container">
+      <div className="content-container">
+        <div className="form-container">
+          <form onSubmit={handleSubmit}>
+            <h2 className="">Register</h2>
+            <br />
+            <br />
+            <span className="subtitle">Email:</span>
+            <br />
+            <input
+              type="text"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <br />
+            <span className="subtitle">PASSWORD:</span>
+            <br />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <br />
+            <br />
+            <button type="submit" className="btn btn-primary">
+        Register
+      </button>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Register
-        </button>
-      </form>
+      </div>
     </div>
+  </div>
   );
 };
 

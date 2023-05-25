@@ -33,7 +33,7 @@ const American = () => {
   return (
     <>
       <h1>American Cuisines</h1>
-      <div className="recipes_container">
+      <div className="recipes_container dropdwon-recipes">
         {americanRecipes.map((recipe) => {
           const { id, title, image, readyInMinutes } = recipe;
           return (
@@ -42,12 +42,12 @@ const American = () => {
                 <Link to={`/recipe/${id}`}>
                   <RecipeCard key={id} title={title} image={image} />
                 </Link>
-                <RecipeCardBottom
+                {/* <RecipeCardBottom
                   readyInMinutes={readyInMinutes}
                   id={id}
                   title={title}
                   image={image}
-                />
+                /> */}
               </div>
             </>
           );

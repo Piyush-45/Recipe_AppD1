@@ -1,61 +1,68 @@
 import React from "react";
 import { useState } from "react";
 import { UserAuth } from "../../context/AuthContext";
-// import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Login = () => {
-  // let auth = getAuth();
+  // const notify = ()=> toast.success("wowo so easy")
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { logIn, user } = UserAuth();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle login logic here
-    try{
-        await logIn(email, password);
-        navigate("/")
-        alert("login successfully")
-    }catch(err){
-        alert(err)
+    try {
+      await logIn(email, password);
+      navigate("/");
+      toast.success("logged in successfully"),
+        {
+          className: "toast-message",
+        };
+    } catch (err) {
+      toast.warn("Wrong Crededntials");
     }
   };
 
   return (
     <div className="login-page-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Login to Recipe App</h2>
-        <div className="form-group">
-          <label htmlFor="username">E-mail</label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
+      <div className="flex-container">
+        <div className="content-container">
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+              <h2 className="">Login</h2>
+              <br />
+              <br />
+              <span className="subtitle">Email:</span>
+              <br />
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <span className="subtitle">PASSWORD:</span>
+              <br />
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+              <br />
+              <button type="submit" className="btn btn-primary">
           Login
         </button>
-      </form>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Login;
-
-
-

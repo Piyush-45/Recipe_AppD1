@@ -5,11 +5,13 @@ import heart from "../images/heart.png";
 import timerequired from "../images/timerequired.png";
 import { Link } from "react-router-dom";
 import SimilarRecipes from "./SimilarRecipes";
+import { UserAuth } from "../../context/AuthContext";
 
 const Popular = () => {
   const key1 = `62bd0b953b6c4a50a3fff4e27084d94c`;
   const key2 = ` 7d8e3d34745c4731b1da758cdad1b008`;
-  const APi = `https://api.spoonacular.com/recipes/complexSearch?apiKey=817073eab2c64effbdbffe3f78543ae2&number=10&cuisine=Irish`;
+  const {API_KEY1, API_KEY2} = UserAuth()
+  const APi = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY2}&cuisine=Irish`;
 
   const [popularRecipes, setPopularRecipes] = useState([]);
   const [nextPage, setNextPage] = useState(2);
@@ -26,11 +28,11 @@ const Popular = () => {
 
   const fetchMoreData = async () => {
     const moreRecipes = await fetch(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=817073eab2c64effbdbffe3f78543ae2&number=10&cuisine=Italian&page=${nextPage}`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY2}&number=10&cuisine=Italian&page=${nextPage}`
     );
-    const data = await moreRecipes.json()
-    setPopularRecipes((prevRecipes)=> [...prevRecipes, ...data.results])
-    setNextPage(nextPage+1)
+    const data = await moreRecipes.json();
+    setPopularRecipes((prevRecipes) => [...prevRecipes, ...data.results]);
+    setNextPage(nextPage + 1);
   };
 
   useEffect(() => {
@@ -45,21 +47,15 @@ const Popular = () => {
           const { id, title, image, readyInMinutes } = item;
           return (
             <div className="recipe_Card" key={id}>
-              <Link key={id} to={`/recipe/${id}`}>
+              <Link to={`/recipe/${id}`}>
                 <RecipeCard id={id} title={title} image={image} />
               </Link>
-              <RecipeCardBottom
-                similarRecipes={<SimilarRecipes id={id} />}
-                id={id}
-                title={title}
-                image={image}
-              />
             </div>
           );
         })}
       </div>
 
-      {popularRecipes !==null && popularRecipes.length >=10 &&(
+      {popularRecipes !== null && popularRecipes.length >= 10 && (
         <div className="load-more">
           <button onClick={fetchMoreData}> Load More</button>
         </div>
@@ -69,10 +65,6 @@ const Popular = () => {
 };
 
 export default Popular;
-
-
-
-
 
 // ! working of function more recipes
 // ?This is a code snippet that defines an asynchronous function called fetchMoreData.
