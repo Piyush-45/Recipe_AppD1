@@ -32,9 +32,9 @@ const{API_KEY1, API_KEY2,API_KEY3} = UserAuth()
     setNextPage(nextPage + 1);
   };
 
-  // useEffect(() => {
-  //   fetchVegetarian(APi);
-  // }, []);
+  useEffect(() => {
+    fetchVegetarian(APi);
+  }, []);
 
   return (
     <>

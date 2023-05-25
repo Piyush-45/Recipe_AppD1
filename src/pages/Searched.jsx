@@ -41,12 +41,7 @@ const Searched = () => {
                   <Link to={`/recipe/${id}`}>
                     <RecipeCard key={id} title={title} image={image} />
                   </Link>
-                  <RecipeCardBottom
-                    // readyInMinutes={readyInMinutes}
-                    id={id}
-                    title={title}
-                    image={image}
-                  />
+               
                 </div>
               </>
             );

@@ -27,9 +27,9 @@ const RandomRecipe = () => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchRandomRecipe(Api);
-  // }, []);
+  useEffect(() => {
+    fetchRandomRecipe(Api);
+  }, []);
 
   return (
     <div className="hero_swiper" id="all_recipes">
